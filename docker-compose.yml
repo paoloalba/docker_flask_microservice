@@ -6,7 +6,7 @@ services:
     image: openssl:application
     container_name: application
     volumes:
-        - /host/path/to/permanentstorage:/app/permanentstorage/
+        - ${host_path_to_sharedstorage}:/app/permanentstorage/
     #the first one is the port that I have to use from the browser
     #the second port is the one declared in the run
     ports:
@@ -20,7 +20,7 @@ services:
     image: openssl:nginx
     container_name: nginx
     volumes:
-        - /host/path/to/permanentstorage:/app/permanentstorage/
+        - ${host_path_to_sharedstorage}:/app/permanentstorage/
     ports:
       - mode: host
         protocol: tcp
