@@ -1,0 +1,32 @@
+version: '3.4'
+services:
+
+  application:
+    build: ./application
+    image: openssl:application
+    container_name: application
+    volumes:
+        - /host/path/to/permanentstorage:/app/permanentstorage/
+    #the first one is the port that I have to use from the browser
+    #the second port is the one declared in the run
+    ports:
+        - mode: host
+          protocol: tcp
+          published: 5000
+          target: 5000
+
+  nginx:
+    build: ./nginx
+    image: openssl:nginx
+    container_name: nginx
+    volumes:
+        - /host/path/to/permanentstorage:/app/permanentstorage/
+    ports:
+      - mode: host
+        protocol: tcp
+        published: 443
+        target: 443
+      - mode: host
+        protocol: tcp
+        published: 80
+        target: 80
